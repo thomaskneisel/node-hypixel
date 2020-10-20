@@ -1,6 +1,7 @@
 import type { Paths } from "../../types/api";
 import { Method } from "../../util/Method";
 import { getResultArray, ResultArray } from "../../util/ResultArray";
+import { getResultObject, ResultObject } from "../../util/ResultObject";
 
 export class SkyBlock extends Method {
   // async auction(): Promise<boolean> {
@@ -46,16 +47,21 @@ export class SkyBlock extends Method {
    * @param profile The profile ID you are looking up.
    * @return A [[Profile | Profile interface]] object.
    */
-  // public async profile(profile: string): Promise<Profile> {
-  //   return returnResponseObject(
-  //     await this.client.call<
-  //       { profile: Profile } & Components.Schemas.ApiSuccess
-  //     >("skyblock/profile", {
-  //       profile,
-  //     }),
-  //     "profile"
-  //   );
-  // }
+  public async profile(
+    profile: string
+  ): Promise<
+    ResultObject<Paths.SkyblockProfile.Get.Responses.$200, "success">
+  > {
+    return getResultObject(
+      await this.client.call<Paths.SkyblockProfile.Get.Responses.$200>(
+        "skyblock/profile",
+        {
+          profile,
+        }
+      ),
+      "success"
+    );
+  }
 
   /**
    * Return an array of profiles for a Hypixel user.

@@ -48,6 +48,11 @@ export declare namespace Components {
       success: boolean;
       items: NewsEntries;
     }
+    // @TODO: define profile
+    export interface ProfileResponse {
+      success: boolean;
+      profile: string;
+    }
     export interface ResourcesResponse {
       /**
        * Whether or not the request succeeded.
@@ -235,6 +240,16 @@ export declare namespace Paths {
     namespace Get {
       namespace Responses {
         export type $200 = Components.Schemas.NewsResponse;
+        export type $400 = Components.Responses.MissingFields;
+        export type $403 = Components.Responses.Unauthorized;
+        export type $429 = Components.Responses.RateLimitError;
+      }
+    }
+  }
+  namespace SkyblockProfile {
+    namespace Get {
+      namespace Responses {
+        export type $200 = Components.Schemas.ProfileResponse;
         export type $400 = Components.Responses.MissingFields;
         export type $403 = Components.Responses.Unauthorized;
         export type $429 = Components.Responses.RateLimitError;
